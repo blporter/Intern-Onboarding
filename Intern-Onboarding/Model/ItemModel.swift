@@ -12,9 +12,9 @@ class ItemModel {
     private let jsonURL = "/assets/cmx/us/messages/collections.json"
 
     var items = [Item]()
+    var delegate: LoaderDelegate?
 
-    // TODO: probably need to change tableView to pass by reference?
-    func fetchJSON(tableView: UITableView) {
+    func fetchJSON() {
         guard let url = URL(string: "\(self.baseURL)\(self.jsonURL)") else {
             print("Problem with JSON URL")
             return
@@ -30,7 +30,12 @@ class ItemModel {
             if let data = data {
                 do {
                     self.items = try JSONDecoder().decode([Item].self, from: data)
-                    OperationQueue.main.addOperation({ tableView.reloadData() })
+
+                    if ViewController.DEBUG {
+                        print("Done fetching JSON -- sending to delegate")
+                    }
+
+                    self.delegate?.hasLoadedJSON()
                 } catch {
                     print(error)
                 }
@@ -39,19 +44,24 @@ class ItemModel {
         task.resume()
     }
 
-    // TODO: images aren't loading again -> Correct to use a delegate here, and probably change tableView to pass by reference.
-    func fetchImages(tableView: UITableView) {
+    func fetchImages() {
         for i in 0..<self.items.count {
             if let url = URL(string: "\(self.baseURL)\(self.items[i].imagePath)") {
+                if ViewController.DEBUG {
+                    print("Fetching image from \(url)")
+                }
+
                 let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
                     if let error = error {
                         print(error)
                         return
                     }
 
+                    // TODO:    calling the delegate here each time an image is loaded means the table is reloading
+                    // TODO:    as many times as there are images. Is there a better way?
                     if let data = data {
                         self.items[i].image = UIImage(data: data) ?? UIImage.init()
-                        OperationQueue.main.addOperation({ tableView.reloadData() })
+                        self.delegate?.hasLoadedImages()
                     }
                 })
                 task.resume()

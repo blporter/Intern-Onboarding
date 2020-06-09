@@ -8,14 +8,34 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
-    private var itemModel = ItemModel()
-    
+class ViewController: UITableViewController, LoaderDelegate {
+    static let DEBUG = false
+
+    private var itemModel: ItemModel? = ItemModel()
+
+    func hasLoadedJSON() {
+        OperationQueue.main.addOperation({ self.tableView.reloadData() })
+
+        if ViewController.DEBUG {
+            print("JSON has loaded -- fetching images")
+        }
+
+        self.itemModel?.fetchImages()
+    }
+
+    func hasLoadedImages() {
+        if ViewController.DEBUG {
+            print("Images have loaded -- reloading view")
+        }
+
+        OperationQueue.main.addOperation({ self.tableView.reloadData() })
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.itemModel.fetchJSON(tableView: self.tableView)
-        self.itemModel.fetchImages(tableView: self.tableView)
+        self.itemModel?.delegate = self
+        self.itemModel?.fetchJSON()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -23,7 +43,11 @@ class ViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemModel.items.count
+        guard let count = itemModel?.items.count else {
+            print("Problem getting item count")
+            return 0
+        }
+        return count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -35,7 +59,12 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
 
         if let cell = cell as? ItemCell {
-            cell.setValues(using: itemModel.items[indexPath.row])
+            guard let item = itemModel?.items[indexPath.row] else {
+                print("Problem getting item cell")
+                return cell
+            }
+
+            cell.setValues(using: item)
 
             if indexPath.section == 1 {
                 cell.imageView?.image = nil
