@@ -48,11 +48,4 @@ class ItemCell: UITableViewCell {
         self.itemText.text = item.title
         self.itemImageView.image = item.image
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        self.itemText.text = nil
-        self.itemImageView.image = nil
-    }
 }
