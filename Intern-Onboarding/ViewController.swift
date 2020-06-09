@@ -24,7 +24,7 @@ class ViewController: UITableViewController, LoaderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.rowHeight = 44
+        self.tableView.rowHeight = 54
 
         self.itemModel.delegate = self
         self.itemModel.fetchJSON()

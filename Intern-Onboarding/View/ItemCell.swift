@@ -14,7 +14,7 @@ class ItemCell: UITableViewCell {
     let itemImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.clipsToBounds = true
         return image
     }()
@@ -31,12 +31,13 @@ class ItemCell: UITableViewCell {
         self.contentView.addSubview(itemImageView)
         self.contentView.addSubview(itemText)
 
-        self.itemImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10).isActive = true
+        self.itemImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        self.itemImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5).isActive = true
         self.itemImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        self.itemImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.itemImageView.heightAnchor.constraint(equalToConstant: 45).isActive = true
 
         self.itemText.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        self.itemText.leadingAnchor.constraint(equalTo: self.itemImageView.trailingAnchor, constant: 10).isActive = true
+        self.itemText.leadingAnchor.constraint(equalTo: self.itemImageView.trailingAnchor, constant: 5).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
