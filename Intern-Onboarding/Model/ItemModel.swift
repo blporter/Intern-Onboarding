@@ -12,7 +12,7 @@ class ItemModel {
     private let jsonURL = "/assets/cmx/us/messages/collections.json"
 
     var items = [Item]()
-    var delegate: LoaderDelegate?
+    weak var delegate: LoaderDelegate?
 
     func fetchJSON() {
         guard let url = URL(string: "\(self.baseURL)\(self.jsonURL)") else {
@@ -35,7 +35,7 @@ class ItemModel {
                         print("Done fetching JSON -- sending to delegate")
                     }
 
-                    self.delegate?.hasLoadedJSON()
+                    self.fetchImages()
                 } catch {
                     print(error)
                 }

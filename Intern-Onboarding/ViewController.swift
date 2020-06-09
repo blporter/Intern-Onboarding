@@ -11,31 +11,23 @@ import UIKit
 class ViewController: UITableViewController, LoaderDelegate {
     static let DEBUG = false
 
-    private var itemModel: ItemModel? = ItemModel()
-
-    func hasLoadedJSON() {
-        OperationQueue.main.addOperation({ self.tableView.reloadData() })
-
-        if ViewController.DEBUG {
-            print("JSON has loaded -- fetching images")
-        }
-
-        self.itemModel?.fetchImages()
-    }
+    private var itemModel: ItemModel = ItemModel()
 
     func hasLoadedImages() {
         if ViewController.DEBUG {
             print("Images have loaded -- reloading view")
         }
 
-        OperationQueue.main.addOperation({ self.tableView.reloadData() })
+        DispatchQueue.main.async(execute: { self.tableView.reloadData() })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.itemModel?.delegate = self
-        self.itemModel?.fetchJSON()
+        self.tableView.rowHeight = 44
+
+        self.itemModel.delegate = self
+        self.itemModel.fetchJSON()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,11 +35,7 @@ class ViewController: UITableViewController, LoaderDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = itemModel?.items.count else {
-            print("Problem getting item count")
-            return 0
-        }
-        return count
+        return itemModel.items.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -55,21 +43,16 @@ class ViewController: UITableViewController, LoaderDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(ItemCell.self, forCellReuseIdentifier: "ItemCell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
+        tableView.register(ItemCell.self, forCellReuseIdentifier: ItemCell.reuseIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ItemCell.reuseIdentifier, for: indexPath)
 
         if let cell = cell as? ItemCell {
-            guard let item = itemModel?.items[indexPath.row] else {
-                print("Problem getting item cell")
-                return cell
-            }
-
-            cell.setValues(using: item)
+            cell.setValues(using: itemModel.items[indexPath.row])
 
             if indexPath.section == 1 {
-                cell.imageView?.image = nil
+                cell.itemImageView.image = nil
             } else if indexPath.section == 2 {
-                cell.textLabel?.text = nil
+                cell.itemText.text = nil
             }
         }
 

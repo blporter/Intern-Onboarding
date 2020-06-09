@@ -5,7 +5,6 @@
 
 import Foundation
 
-protocol LoaderDelegate {
-    func hasLoadedJSON()
+protocol LoaderDelegate: AnyObject {
     func hasLoadedImages()
 }
