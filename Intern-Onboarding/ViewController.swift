@@ -23,15 +23,17 @@ class ViewController: UITableViewController, LoaderDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableView.rowHeight = 54
-
+        
         self.itemModel.delegate = self
         self.itemModel.fetchJSON()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 54
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
