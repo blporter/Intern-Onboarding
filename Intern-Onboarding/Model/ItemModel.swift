@@ -49,9 +49,15 @@ class ItemModel {
                 if ViewController.DEBUG {
                     print("Fetching image from \(url)")
                 }
-                items[i].imageView?.sd_setImage(with: url)
+                items[i].imageView?.sd_setImage(with: url, completed: { (image, error, cache, url) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+
+                    self.delegate?.hasLoadedImages()
+                })
             }
         }
-        self.delegate?.hasLoadedImages()
     }
 }

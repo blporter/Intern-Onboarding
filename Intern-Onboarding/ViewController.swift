@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class ViewController: UITableViewController, LoaderDelegate {
-    static let DEBUG = true
+    static let DEBUG = false
 
     private var itemModel: ItemModel = ItemModel()
 
