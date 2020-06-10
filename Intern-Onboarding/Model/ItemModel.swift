@@ -34,13 +34,24 @@ class ItemModel {
                     if ViewController.DEBUG {
                         print("Done fetching JSON -- sending to delegate")
                     }
-
-                    self.delegate?.hasLoadedJSON()
+                    self.fetchImages()
                 } catch {
                     print(error)
                 }
             }
         })
         task.resume()
+    }
+
+    func fetchImages() {
+        for i in 0..<items.count {
+            if let url = URL(string: "\(ItemModel.baseURL)\(items[i].imagePath)") {
+                if ViewController.DEBUG {
+                    print("Fetching image from \(url)")
+                }
+                items[i].imageView?.sd_setImage(with: url)
+            }
+        }
+        self.delegate?.hasLoadedImages()
     }
 }

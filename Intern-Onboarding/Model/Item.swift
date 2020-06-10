@@ -10,7 +10,7 @@ struct Item: Decodable {
     var imagePath: String
     var filter: String
     var title: String
-    var image: UIImage
+    var imageView: UIImageView?
 
     enum CodingKeys: String, CodingKey {
         case imagePath = "image"
@@ -25,6 +25,6 @@ struct Item: Decodable {
         self.filter = try values.decode(String.self, forKey: .filter)
         self.title = try values.decode(String.self, forKey: .title)
 
-        self.image = UIImage.init()
+        self.imageView = UIImageView()
     }
 }
