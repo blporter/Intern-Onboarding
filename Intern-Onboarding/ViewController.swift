@@ -47,25 +47,19 @@ class ViewController: UITableViewController, LoaderDelegate {
 
         if let cell = cell as? ItemCell {
             let item = itemModel.items[indexPath.row]
-            let imageView = UIImageView()
 
+            cell.itemText.text = item.title
             if let url = URL(string: "\(ItemModel.baseURL)\(item.imagePath)") {
                 if ViewController.DEBUG {
                     print("Fetching image from \(url)")
                 }
-                imageView.sd_setImage(with: url)
+                cell.itemImageView.sd_setImage(with: url)
             }
 
-            switch indexPath.section {
-            case 1:
+            if indexPath.section == 1 {
                 cell.itemImageView.image = nil
-                cell.itemText.text = item.title
-            case 2:
-                cell.itemImageView.image = imageView.image
+            } else if indexPath.section == 2 {
                 cell.itemText.text = nil
-            default:
-                cell.itemImageView.image = imageView.image
-                cell.itemText.text = item.title
             }
         }
 
