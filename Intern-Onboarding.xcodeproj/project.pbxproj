@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		115BD8E907FFEB104DA9D336 /* Pods_Intern_Onboarding.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6059586A8B7D3ABEC57C4E03 /* Pods_Intern_Onboarding.framework */; };
 		1DFE10648FA0FF9794742F51 /* LoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE1A3C5401CCF9E38FA8D6 /* LoaderDelegate.swift */; };
 		1DFE195AD85D54F1D3FA521E /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE1365B2B56BC0C6A2975D /* ItemCell.swift */; };
 		1DFE1C7520347F523D4BC79E /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE19C9F3C6FF4D9AC0E285 /* ItemModel.swift */; };
@@ -24,6 +25,9 @@
 		1DFE1365B2B56BC0C6A2975D /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1DFE19C9F3C6FF4D9AC0E285 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		1DFE1A3C5401CCF9E38FA8D6 /* LoaderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderDelegate.swift; sourceTree = "<group>"; };
+		4647132A62E0DDA67EE2418E /* Pods-Intern-Onboarding.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Intern-Onboarding.debug.xcconfig"; path = "Target Support Files/Pods-Intern-Onboarding/Pods-Intern-Onboarding.debug.xcconfig"; sourceTree = "<group>"; };
+		6059586A8B7D3ABEC57C4E03 /* Pods_Intern_Onboarding.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Intern_Onboarding.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACA59B4D06E16065563AD40B /* Pods-Intern-Onboarding.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Intern-Onboarding.release.xcconfig"; path = "Target Support Files/Pods-Intern-Onboarding/Pods-Intern-Onboarding.release.xcconfig"; sourceTree = "<group>"; };
 		D2CECCF42489C4C40062E5A8 /* Intern-Onboarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Intern-Onboarding.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CECCF72489C4C40062E5A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2CECCF92489C4C40062E5A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,17 +43,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				115BD8E907FFEB104DA9D336 /* Pods_Intern_Onboarding.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BBCA12E011F2D94DFFF63DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6059586A8B7D3ABEC57C4E03 /* Pods_Intern_Onboarding.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2CECCEB2489C4C40062E5A8 = {
 			isa = PBXGroup;
 			children = (
 				D2CECCF62489C4C40062E5A8 /* Intern-Onboarding */,
 				D2CECCF52489C4C40062E5A8 /* Products */,
+				FBFBA2FDDB0AC364AA34E10E /* Pods */,
+				5BBCA12E011F2D94DFFF63DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +110,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		FBFBA2FDDB0AC364AA34E10E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4647132A62E0DDA67EE2418E /* Pods-Intern-Onboarding.debug.xcconfig */,
+				ACA59B4D06E16065563AD40B /* Pods-Intern-Onboarding.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,9 +127,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2CECD082489C4C50062E5A8 /* Build configuration list for PBXNativeTarget "Intern-Onboarding" */;
 			buildPhases = (
+				0C55B031DA71232556824639 /* [CP] Check Pods Manifest.lock */,
 				D2CECCF02489C4C40062E5A8 /* Sources */,
 				D2CECCF12489C4C40062E5A8 /* Frameworks */,
 				D2CECCF22489C4C40062E5A8 /* Resources */,
+				5E1ADDD02C2FAEB13E085BFA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +187,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C55B031DA71232556824639 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Intern-Onboarding-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E1ADDD02C2FAEB13E085BFA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Intern-Onboarding/Pods-Intern-Onboarding-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Intern-Onboarding/Pods-Intern-Onboarding-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Intern-Onboarding/Pods-Intern-Onboarding-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2CECCF02489C4C40062E5A8 /* Sources */ = {
@@ -314,6 +383,7 @@
 		};
 		D2CECD092489C4C50062E5A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4647132A62E0DDA67EE2418E /* Pods-Intern-Onboarding.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -332,6 +402,7 @@
 		};
 		D2CECD0A2489C4C50062E5A8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACA59B4D06E16065563AD40B /* Pods-Intern-Onboarding.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

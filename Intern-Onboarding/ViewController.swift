@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UITableViewController, LoaderDelegate {
-    static let DEBUG = false
+    static let DEBUG = true
 
     private var itemModel: ItemModel = ItemModel()
 

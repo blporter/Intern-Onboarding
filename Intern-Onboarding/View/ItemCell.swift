@@ -46,6 +46,12 @@ class ItemCell: UITableViewCell {
 
     func setValues(using item: Item) {
         self.itemText.text = item.title
-        self.itemImageView.image = item.image
+
+        if let url = URL(string: "\(ItemModel.baseURL)\(item.imagePath)") {
+            if ViewController.DEBUG {
+                print("Fetching image from \(url)")
+            }
+            self.itemImageView.sd_setImage(with: url)
+        }
     }
 }

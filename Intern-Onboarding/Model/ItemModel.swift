@@ -5,17 +5,18 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class ItemModel {
     // These are just for convenience.
-    private let baseURL = "https://www.weightwatchers.com"
-    private let jsonURL = "/assets/cmx/us/messages/collections.json"
+    static let baseURL = "https://www.weightwatchers.com"
+    static let jsonURL = "/assets/cmx/us/messages/collections.json"
 
     var items = [Item]()
     weak var delegate: LoaderDelegate?
 
     func fetchJSON() {
-        guard let url = URL(string: "\(self.baseURL)\(self.jsonURL)") else {
+        guard let url = URL(string: "\(ItemModel.baseURL)\(ItemModel.jsonURL)") else {
             print("Problem with JSON URL")
             return
         }
@@ -35,7 +36,7 @@ class ItemModel {
                         print("Done fetching JSON -- sending to delegate")
                     }
 
-                    self.fetchImages()
+                     self.fetchImages()
                 } catch {
                     print(error)
                 }
@@ -45,27 +46,13 @@ class ItemModel {
     }
 
     func fetchImages() {
-        for i in 0..<self.items.count {
-            if let url = URL(string: "\(self.baseURL)\(self.items[i].imagePath)") {
-                if ViewController.DEBUG {
-                    print("Fetching image from \(url)")
-                }
-
-                let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
-                    if let error = error {
-                        print(error)
-                        return
-                    }
-
-                    // TODO:    calling the delegate here each time an image is loaded means the table is reloading
-                    // TODO:    as many times as there are images. Is there a better way?
-                    if let data = data {
-                        self.items[i].image = UIImage(data: data) ?? UIImage.init()
-                        self.delegate?.hasLoadedImages()
-                    }
-                })
-                task.resume()
-            }
-        }
+//        for i in 0..<self.items.count {
+//            if let url = URL(string: "\(ItemModel.baseURL)\(self.items[i].imagePath)") {
+//                if ViewController.DEBUG {
+//                    print("Fetching image from \(url)")
+//                }
+//            }
+//        }
+        self.delegate?.hasLoadedImages()
     }
 }
