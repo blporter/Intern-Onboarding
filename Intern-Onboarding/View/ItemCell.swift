@@ -12,17 +12,17 @@ class ItemCell: UITableViewCell {
     }
 
     let itemImageView: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
-        image.clipsToBounds = true
-        return image
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        return view
     }()
 
     let itemText: UILabel = {
-        let text = UILabel()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        return text
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -42,16 +42,5 @@ class ItemCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-
-    func setValues(using item: Item) {
-        self.itemText.text = item.title
-
-        if let url = URL(string: "\(ItemModel.baseURL)\(item.imagePath)") {
-            if ViewController.DEBUG {
-                print("Fetching image from \(url)")
-            }
-            self.itemImageView.sd_setImage(with: url)
-        }
     }
 }

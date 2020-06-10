@@ -5,7 +5,6 @@
 
 import Foundation
 import UIKit
-import SDWebImage
 
 class ItemModel {
     // These are just for convenience.
@@ -36,23 +35,12 @@ class ItemModel {
                         print("Done fetching JSON -- sending to delegate")
                     }
 
-                     self.fetchImages()
+                    self.delegate?.hasLoadedJSON()
                 } catch {
                     print(error)
                 }
             }
         })
         task.resume()
-    }
-
-    func fetchImages() {
-//        for i in 0..<self.items.count {
-//            if let url = URL(string: "\(ItemModel.baseURL)\(self.items[i].imagePath)") {
-//                if ViewController.DEBUG {
-//                    print("Fetching image from \(url)")
-//                }
-//            }
-//        }
-        self.delegate?.hasLoadedImages()
     }
 }

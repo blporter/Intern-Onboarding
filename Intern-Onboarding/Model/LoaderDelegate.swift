@@ -6,5 +6,5 @@
 import Foundation
 
 protocol LoaderDelegate: AnyObject {
-    func hasLoadedImages()
+    func hasLoadedJSON()
 }

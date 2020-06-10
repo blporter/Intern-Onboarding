@@ -7,23 +7,20 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ViewController: UITableViewController, LoaderDelegate {
-    static let DEBUG = true
+    static let DEBUG = false
 
     private var itemModel: ItemModel = ItemModel()
 
-    func hasLoadedImages() {
-        if ViewController.DEBUG {
-            print("Images have loaded -- reloading view")
-        }
-
+    func hasLoadedJSON() {
         DispatchQueue.main.async(execute: { self.tableView.reloadData() })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.itemModel.delegate = self
         self.itemModel.fetchJSON()
     }
@@ -49,12 +46,26 @@ class ViewController: UITableViewController, LoaderDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: ItemCell.reuseIdentifier, for: indexPath)
 
         if let cell = cell as? ItemCell {
-            cell.setValues(using: itemModel.items[indexPath.row])
+            let item = itemModel.items[indexPath.row]
+            let imageView = UIImageView()
 
-            if indexPath.section == 1 {
+            if let url = URL(string: "\(ItemModel.baseURL)\(item.imagePath)") {
+                if ViewController.DEBUG {
+                    print("Fetching image from \(url)")
+                }
+                imageView.sd_setImage(with: url)
+            }
+
+            switch indexPath.section {
+            case 1:
                 cell.itemImageView.image = nil
-            } else if indexPath.section == 2 {
+                cell.itemText.text = item.title
+            case 2:
+                cell.itemImageView.image = imageView.image
                 cell.itemText.text = nil
+            default:
+                cell.itemImageView.image = imageView.image
+                cell.itemText.text = item.title
             }
         }
 
