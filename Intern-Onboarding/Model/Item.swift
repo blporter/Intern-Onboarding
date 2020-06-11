@@ -21,10 +21,10 @@ struct Item: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        self.imagePath = try values.decode(String.self, forKey: .imagePath)
-        self.filter = try values.decode(String.self, forKey: .filter)
-        self.title = try values.decode(String.self, forKey: .title)
+        imagePath = try values.decode(String.self, forKey: .imagePath)
+        filter = try values.decode(String.self, forKey: .filter)
+        title = try values.decode(String.self, forKey: .title)
 
-        self.imageView = UIImageView()
+        imageView = UIImageView()
     }
 }

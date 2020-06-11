@@ -24,8 +24,8 @@ class ViewController: UITableViewController, LoaderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.itemModel.delegate = self
-        self.itemModel.fetchJSON()
+        itemModel.delegate = self
+        itemModel.fetchJSON()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

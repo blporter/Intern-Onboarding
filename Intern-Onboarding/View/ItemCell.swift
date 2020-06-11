@@ -28,16 +28,16 @@ class ItemCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        self.contentView.addSubview(itemImageView)
-        self.contentView.addSubview(itemText)
+        contentView.addSubview(itemImageView)
+        contentView.addSubview(itemText)
 
-        self.itemImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        self.itemImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 5).isActive = true
-        self.itemImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        self.itemImageView.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        itemImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        itemImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        itemImageView.heightAnchor.constraint(equalToConstant: 45).isActive = true
 
-        self.itemText.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        self.itemText.leadingAnchor.constraint(equalTo: self.itemImageView.trailingAnchor, constant: 5).isActive = true
+        itemText.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        itemText.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 5).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
