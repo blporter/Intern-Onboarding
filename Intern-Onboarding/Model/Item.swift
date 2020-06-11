@@ -12,7 +12,7 @@ struct Item: Decodable {
     var title: String
     var imageView: UIImageView?
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case imagePath = "image"
         case filter
         case title

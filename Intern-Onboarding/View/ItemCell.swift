@@ -6,12 +6,12 @@
 import Foundation
 import UIKit
 
-class ItemCell: UITableViewCell {
+final class ItemCell: UITableViewCell {
     static var reuseIdentifier: String {
         return String(describing: self)
     }
 
-    let itemImageView: UIImageView = {
+    final let itemImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
@@ -19,7 +19,7 @@ class ItemCell: UITableViewCell {
         return view
     }()
 
-    let itemText: UILabel = {
+    final let itemText: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
