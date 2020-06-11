@@ -45,20 +45,26 @@ final class ItemModel {
     }
 
     final func fetchImages() {
+        let dispatchGroup = DispatchGroup()
+
         for i in 0..<items.count {
+            dispatchGroup.enter()
+
             if let url = URL(string: "\(ItemModel.baseURL)\(items[i].imagePath)") {
                 if ViewController.DEBUG {
                     print("Fetching image from \(url)")
                 }
+
                 items[i].imageView?.sd_setImage(with: url, completed: { (image, error, cache, url) in
                     if error != nil {
                         print(error as Any)
                         return
                     }
-
-                    self.delegate?.hasLoadedImages()
+                    dispatchGroup.leave()
                 })
             }
         }
+
+        dispatchGroup.notify(queue: .main, execute: { self.delegate?.hasLoadedImages() })
     }
 }
