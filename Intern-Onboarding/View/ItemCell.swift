@@ -11,7 +11,7 @@ final class ItemCell: UITableViewCell {
         return String(describing: self)
     }
 
-    final let itemImageView: UIImageView = {
+    final private let itemImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
@@ -19,28 +19,38 @@ final class ItemCell: UITableViewCell {
         return view
     }()
 
-    final let itemText: UILabel = {
+    final private let itemText: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+    final private func setConstraints() {
         contentView.addSubview(itemImageView)
         contentView.addSubview(itemText)
 
-        itemImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        itemImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        itemImageView.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        NSLayoutConstraint.activate([
+                                        itemImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                                        itemImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+                                        itemImageView.widthAnchor.constraint(equalToConstant: 70),
+                                        itemImageView.heightAnchor.constraint(equalToConstant: 45),
 
-        itemText.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        itemText.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 5).isActive = true
+                                        itemText.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                                        itemText.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor, constant: 5),
+                                    ])
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    public func setValues(text: String?, image: UIImage?) {
+        itemText.text = text
+        itemImageView.image = image
     }
 }
