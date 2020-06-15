@@ -10,6 +10,10 @@ extension ViewController: LoaderDelegate {
     func hasLoadedImages() {
         if let tableView = self.view as? UITableView {
             DispatchQueue.main.async(execute: { tableView.reloadData() })
+        } else {
+            // For the FP-2400 ticket
+            configureImageView()
+            configureTextView()
         }
     }
 }

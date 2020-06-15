@@ -10,16 +10,26 @@ import UIKit
 import SDWebImage
 
 class ViewController: UIViewController {
+    let screenBounds = UIScreen.main.bounds
+    let margin = CGFloat(20)
+
+    var imageHeight = CGFloat(0)
     var itemModel = ItemModel()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    let imageView = UIImageView()
+    let textView = UITextView()
 
-        view = UITableView()
-        (view as? UITableView)?.dataSource = self
-        (view as? UITableView)?.delegate = self
+    override func viewDidLoad() {
+        view.addSubview(imageView)
+        view.addSubview(textView)
+
+        imageHeight = screenBounds.size.height / 2.15
+
+        super.viewDidLoad()
 
         itemModel.delegate = self
         itemModel.fetchJSON()
+
+        view.backgroundColor = .white
     }
 }
