@@ -12,8 +12,8 @@ extension ViewController: LoaderDelegate {
             DispatchQueue.main.async(execute: { tableView.reloadData() })
         } else {
             // For the FP-2400 ticket
-            configureImageView()
-            configureTextView()
+            setupImageView()
+            setupTextView()
         }
     }
 }

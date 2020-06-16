@@ -10,7 +10,6 @@ import UIKit
 import SDWebImage
 
 class ViewController: UIViewController {
-    let screenBounds = UIScreen.main.bounds
     let margin = CGFloat(20)
 
     var imageHeight = CGFloat(0)
@@ -20,16 +19,48 @@ class ViewController: UIViewController {
     let textView = UITextView()
 
     override func viewDidLoad() {
-        view.addSubview(imageView)
-        view.addSubview(textView)
-
-        imageHeight = screenBounds.size.height / 2.15
-
         super.viewDidLoad()
+
+        imageHeight = UIScreen.main.bounds.size.height / 2.15
 
         itemModel.delegate = self
         itemModel.fetchJSON()
 
         view.backgroundColor = .white
+    }
+
+    func setupImageView() {
+        view.addSubview(imageView)
+
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        NSLayoutConstraint.activate([imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                     imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                     imageView.topAnchor.constraint(equalTo: view.topAnchor),
+                                     imageView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: imageHeight)])
+
+        if let image = itemModel.items[0].imageView?.image {
+            imageView.image = image
+        }
+    }
+
+    func setupTextView() {
+        view.addSubview(textView)
+
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
+                                     textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
+                                     textView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: margin),
+                                     textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin)])
+
+        textView.textColor = .black
+        textView.textAlignment = .justified
+        textView.text = "Welcome to myWW, [name]!"
+        textView.font = textView.font?.withSize(36)
+        // This background color demonstrates the margin set in the constraints.
+        textView.backgroundColor = .lightGray
+        textView.isEditable = false
+        textView.isSelectable = false
     }
 }
