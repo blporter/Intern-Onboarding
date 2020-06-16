@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         imageView.clipsToBounds = true
         NSLayoutConstraint.activate([imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                      imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     imageView.topAnchor.constraint(equalTo: view.topAnchor),
+                                     imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.safeAreaInsets.top),
                                      imageView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: imageHeight)])
 
         if let image = itemModel.items[0].imageView?.image {
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin),
                                      textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -margin),
                                      textView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: margin),
-                                     textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin)])
+                                     textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin - view.safeAreaInsets.bottom)])
 
         textView.textColor = .black
         textView.textAlignment = .justified
